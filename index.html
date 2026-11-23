@@ -90,6 +90,11 @@ details p{padding:0 0 18px;color:var(--leise);max-width:70ch}
 .stimme .muster{justify-self:start;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#6b5312;background:var(--hinweis);border:1px solid #e6d59a;border-radius:4px;padding:2px 8px}
 .stimme blockquote{margin:0;font-family:var(--schrift-titel);font-size:1.12rem;line-height:1.45;color:var(--tinte)}
 .stimme .wer{font-size:.9rem;color:var(--leise)}
+.kommt{display:inline-block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--leise);border:1.5px dashed #9aaab1;border-radius:999px;padding:1px 9px;vertical-align:middle;white-space:nowrap}
+.schnell{display:flex;flex-wrap:wrap;gap:8px;width:100%;justify-content:flex-end;border-top:1px solid var(--linie);padding-top:10px}
+.schnell a{font-size:.88rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:6px;border:1.5px solid var(--petrol);color:var(--petrol)}
+.schnell a.voll{background:var(--petrol);color:#fff}
+.notfall{border-left:4px solid #b3261e;background:var(--flaeche);border-radius:0 8px 8px 0;padding:18px 20px;display:grid;gap:6px}
 .platzhalter{border:2px dashed var(--linie);border-radius:8px;padding:22px;color:var(--leise);background:transparent}
 .ansprech{display:flex;gap:16px;align-items:center;background:var(--flaeche);border:1px solid var(--linie);border-radius:8px;padding:18px}
 .ansprech .bild{width:68px;height:68px;border-radius:50%;flex:none;border:2px solid var(--linie);background:#dfe9e3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 68'%3E%3Ccircle cx='34' cy='26' r='12' fill='%2386b39a'/%3E%3Cpath d='M10 68c2-18 12-26 24-26s22 8 24 26z' fill='%2386b39a'/%3E%3C/svg%3E") center/cover}
@@ -131,6 +136,22 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   section.block{padding:38px 0}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.ansprech .portrait{display:block;width:clamp(5.25rem,11vw,8.25rem);aspect-ratio:4/4;object-fit:cover;object-position:50% 35%;border-radius:5px;flex:none}
+.ansprech .rolle{display:block;color:var(--leise);font-size:.94rem}
+.ansprech .direkt{display:inline-block;margin-top:.25rem;font-weight:500;text-underline-offset:.15em}
+.bildfeld{display:block;width:100%;height:auto;aspect-ratio:1.6;object-fit:cover;border-radius:6px;margin-bottom:4px;background:#dfe9e3}
+.bildfeld.maklerin{object-position:50% 32%}
+.marke .logo{display:block;width:clamp(9rem,16vw,10.6rem);height:auto;max-width:100%;margin-bottom:4px}
+.startbuehne .rand{grid-template-columns:minmax(0,1.12fr) minmax(0,.95fr);gap:clamp(1.5rem,4vw,3rem);align-items:center}
+.starttext{display:grid;gap:20px}
+.startfoto{margin:0}
+.startfoto img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 45%;border-radius:7px;background:#214b35}
+@media(max-width:760px){
+  .startbuehne .rand{grid-template-columns:minmax(0,1fr)}
+  .startfoto img{aspect-ratio:16/9;max-height:19rem}
+}
+@media(max-width:370px){.ansprech{padding:12px;gap:12px}.ansprech .portrait{width:4.5rem}}
+
 </style>
 </head>
 <body>
@@ -145,15 +166,21 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 
 <header class="kopf">
   <div class="rand">
-    <a class="marke" href="#start">Munte Immobilien<small>Braunschweig · seit 1960</small></a>
+    <a class="marke" href="#start"><img class="logo" src="https://www.munte-immobilien.de/wp-content/uploads/2025/04/Logo_Munte_Immobilien.svg" width="300" height="76" alt="Munte Immobilien" decoding="async"><small>Braunschweig · seit 1960</small></a>
     <nav class="haupt" aria-label="Hauptmenü">
       <a href="#start" data-ziel="start">Start</a>
       <a href="#mietverwaltung" data-ziel="mietverwaltung">Mietverwaltung</a>
       <a href="#weg-verwaltung" data-ziel="weg-verwaltung">WEG-Verwaltung</a>
       <a href="#vermietung" data-ziel="vermietung">Vermietung</a>
       <a href="#makler" data-ziel="makler">Kauf &amp; Verkauf</a>
+      <a href="#verwalterwechsel" data-ziel="verwalterwechsel">Wechsel zu Munte</a>
+      <a href="#fuer-mieter" data-ziel="fuer-mieter">Für Mieter</a>
       <a href="#kontakt" data-ziel="kontakt">Angebot anfordern</a>
     </nav>
+    <div class="schnell" aria-label="Schnellzugriff">
+      <a class="voll" href="#fuer-mieter">Schaden melden</a>
+      <a href="#fuer-mieter">Login für Mieter und Eigentümer</a>
+    </div>
   </div>
 </header>
 
@@ -161,14 +188,18 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 
 <!-- ===================== START ===================== -->
 <div class="ansicht aktiv" id="ansicht-start">
-  <div class="buehne"><div class="rand">
+  <div class="buehne startbuehne"><div class="rand"><div class="starttext">
     <p class="kruemel">Hausverwaltung · Vermietung · Makler</p>
     <h1>Ihre Hausverwaltung in Braunschweig</h1>
-    <p class="lead">Miet- und WEG-Verwaltung, Vermietung und Verkauf aus einer Hand. Seit 1960 kümmern wir uns um Immobilien in Braunschweig und der Region: vor Ort für Sie da, sauber abgerechnet, digital organisiert.</p>
+    <p class="lead">Miet- und WEG-Verwaltung, Vermietung und Verkauf aus einer Hand. Wir wachsen und übernehmen neue Objekte in Braunschweig und der Region: mit der Erfahrung seit 1960 und mit Abläufen, die durchgängig digital laufen.</p>
     <div class="knopfzeile">
       <a class="knopf" href="#kontakt">Angebot anfordern</a>
       <a class="knopf zweit" href="#mietverwaltung">Zur Mietverwaltung</a>
     </div>
+    </div>
+    <figure class="startfoto">
+      <img src="https://www.munte-immobilien.de/wp-content/uploads/2025/09/Magniviertel1.webp" alt="Blick ins Braunschweiger Magniviertel" fetchpriority="high" decoding="async">
+    </figure>
   </div></div>
 
   <section class="block"><div class="rand">
@@ -183,14 +214,27 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 
   <section class="block"><div class="rand">
     <div class="einleitung">
+      <h2>Wechseln Sie zu einer Verwaltung, die liefert</h2>
+      <p class="text">Sie sind mit Ihrer Verwaltung nicht zufrieden oder wollen Ihr Haus erstmals in andere Hände geben? Die Übernahme ist unser Tagesgeschäft. Wir holen Ihr Objekt ab, wo es steht, und bringen es in geordnete Abläufe.</p>
+    </div>
+    <div class="raster">
+      <article class="karte"><h3>Übernahme nach festem Plan</h3><p>Vier Schritte, ein Stichtag, ein Verantwortlicher. Sie wissen jederzeit, was als Nächstes passiert.</p></article>
+      <article class="karte"><h3>Digital vom ersten Tag</h3><p><span class="pruef">Unterlagen, Verträge und Zählerstände werden bei der Übernahme digital erfasst und geprüft. Ab dem Stichtag läuft jeder Vorgang mit Status und Frist.</span></p></article>
+      <article class="karte"><h3>Keine Arbeit für Sie</h3><p>Wir sprechen mit dem bisherigen Verwalter, informieren Mieter und Dienstleister und richten die Konten ein.</p></article>
+    </div>
+    <div class="knopfzeile"><a class="knopf dunkel" href="#verwalterwechsel">So läuft der Wechsel</a></div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
       <h2>Vier Leistungen, vier klare Wege</h2>
       <p class="text">Jede Leistung hat eine eigene Seite mit eigenem Ansprechpartner. So finden Sie schnell, was Sie brauchen.</p>
     </div>
     <div class="raster">
-      <article class="karte weg"><div class="bildfeld b1" role="img" aria-label="Beispielbild: Mehrfamilienhaus"><span>Beispielbild</span></div><h3>Mietverwaltung</h3><p>Für Eigentümer von Mehrfamilienhäusern, Wohn- und Geschäftshäusern: Mieter, Miete, Abrechnung und Instandhaltung in einer Hand.</p><a class="mehr" href="#mietverwaltung">Mietverwaltung in Braunschweig →</a></article>
-      <article class="karte weg"><div class="bildfeld b2" role="img" aria-label="Beispielbild: Eigentümer im Gespräch"><span>Beispielbild</span></div><h3>WEG-Verwaltung</h3><p>Für Eigentümergemeinschaften: Versammlung, Wirtschaftsplan, Jahresabrechnung und Umsetzung der Beschlüsse.</p><a class="mehr" href="#weg-verwaltung">WEG-Verwaltung in Braunschweig →</a></article>
-      <article class="karte weg"><div class="bildfeld b3" role="img" aria-label="Beispielbild: Schlüsselübergabe"><span>Beispielbild</span></div><h3>Vermietung</h3><p>Für Vermieter, die den passenden Mieter suchen: Mietpreis, Exposé, Besichtigung, Bonitätsprüfung und Übergabe.</p><a class="mehr" href="#vermietung">Wohnung vermieten in Braunschweig →</a></article>
-      <article class="karte weg"><div class="bildfeld b4" role="img" aria-label="Beispielbild: Berater vor einem Haus"><span>Beispielbild</span></div><h3>Kauf &amp; Verkauf</h3><p>Für Verkäufer und Käufer: Bewertung, Vermarktung und Begleitung bis zum Notartermin durch Munte Makler.</p><a class="mehr" href="#makler">Immobilienmakler in Braunschweig →</a></article>
+      <article class="karte weg"><img class="bildfeld" src="https://www.munte-immobilien.de/wp-content/uploads/2025/09/Steinweg_01.webp" alt="Blick von oben auf das Gebäudeensemble am Braunschweiger Steinweg" loading="lazy" decoding="async"><h3>Mietverwaltung</h3><p>Für Eigentümer von Mehrfamilienhäusern, Wohn- und Geschäftshäusern: Mieter, Miete, Abrechnung und Instandhaltung in einer Hand.</p><a class="mehr" href="#mietverwaltung">Mietverwaltung in Braunschweig →</a></article>
+      <article class="karte weg"><img class="bildfeld" src="https://www.munte-immobilien.de/wp-content/uploads/2025/09/Q-Stall_Mascherode.webp" alt="Q-Stall in Braunschweig-Mascherode" loading="lazy" decoding="async"><h3>WEG-Verwaltung</h3><p>Für Eigentümergemeinschaften: Versammlung, Wirtschaftsplan, Jahresabrechnung und Umsetzung der Beschlüsse.</p><a class="mehr" href="#weg-verwaltung">WEG-Verwaltung in Braunschweig →</a></article>
+      <article class="karte weg"><img class="bildfeld" src="https://www.munte-immobilien.de/wp-content/uploads/2026/01/Riptide1-scaled.jpg" alt="Fachwerkhäuser und rote Ziegeldächer an einer Braunschweiger Straße" loading="lazy" decoding="async"><h3>Vermietung</h3><p>Für Vermieter, die den passenden Mieter suchen: Mietpreis, Exposé, Besichtigung, Bonitätsprüfung und Übergabe.</p><a class="mehr" href="#vermietung">Wohnung vermieten in Braunschweig →</a></article>
+      <article class="karte weg"><img class="bildfeld maklerin" src="https://www.munte-immobilien.de/wp-content/uploads/2026/02/Kerry-Munte_neu-2.webp" alt="Kerry Munte, Immobilienmaklerin" loading="lazy" decoding="async"><h3>Kauf &amp; Verkauf</h3><p>Für Verkäufer und Käufer: Bewertung, Vermarktung und Begleitung bis zum Notartermin durch Munte Makler.</p><a class="mehr" href="#makler">Immobilienmakler in Braunschweig →</a></article>
     </div>
   </div></section>
 
@@ -210,7 +254,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
     <div class="einleitung">
       <h2>Verlässlich aus Überzeugung. Modern aus Verantwortung.</h2>
       <p class="text">Munte ist als Familienunternehmen gewachsen. Wir verwalten Immobilien so, wie wir es für unsere eigenen tun: mit langem Atem, mit einem Team vor Ort und mit Abrechnungen, die man versteht.</p>
-      <p class="text">Dazu gehört heute, dass Abläufe digital laufen. Eine Meldung geht nicht verloren, eine Frist wird nicht übersehen, und Sie sehen jederzeit, wo Ihr Anliegen steht. Die Technik arbeitet im Hintergrund. Im Vordergrund steht ein Mensch, der Ihr Haus kennt.</p>
+      <p class="text"><span class="pruef">Heute laufen unsere Abläufe durchgängig digital: Jede Meldung wird zum Vorgang mit Zuständigkeit, Frist und Status. Nichts geht verloren, nichts bleibt liegen, und Sie sehen jederzeit, wo Ihr Anliegen steht.</span> Das macht uns schnell und überprüfbar. Im Vordergrund bleibt ein Team, das Ihr Haus kennt.</p>
     </div>
     <ul class="haken">
       
@@ -245,7 +289,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   <div class="buehne"><div class="rand">
     <p class="kruemel">Für Eigentümer · Mietverwaltung</p>
     <h1>Mietverwaltung in Braunschweig</h1>
-    <p class="lead">Wir kümmern uns um Mieter, Miete und Haus. Sie behalten den Überblick und gewinnen Zeit zurück.</p>
+    <p class="lead">Wir übernehmen Ihr Haus vollständig: Mieter, Miete, Abrechnung und Instandhaltung. Der Wechsel zu uns folgt einem festen Plan, und Sie haben damit keine Arbeit.</p>
     <div class="knopfzeile">
       <a class="knopf" href="#kontakt">Angebot anfordern</a>
       <a class="knopf zweit" href="#vermietung">Nur einen Mieter finden?</a>
@@ -268,7 +312,10 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       <p class="text">Ein Mietshaus zu besitzen ist eine gute Sache. Es zu verwalten kostet Zeit: Mieter rufen an, die Heizung fällt aus, die Nebenkostenabrechnung ist fällig, eine Wohnung wird frei. Als Mietverwaltung in Braunschweig nehmen wir Ihnen diese Arbeit ab.</p>
       <p class="text">Sie entscheiden über das Wesentliche, etwa über größere Investitionen. Alles andere erledigen wir und berichten Ihnen regelmäßig, klar und in Zahlen.</p>
     </div>
-    <div class="ansprech"><div class="bild" aria-hidden="true"></div><div><strong>Leitung Mietverwaltung</strong><br><span style="color:var(--leise)">Foto, Name und Direktwahl aus dem bestehenden Auftritt</span></div></div>
+    <div class="ansprech">
+      <img class="portrait" src="https://www.munte-immobilien.de/wp-content/uploads/2026/03/Niklas-5.webp" alt="Porträt von Niklas Sattler" loading="lazy" decoding="async">
+      <div><strong>Niklas Sattler</strong><span class="rolle">Leitung Mietverwaltung</span><a class="direkt" href="tel:+495311206419">0531 120 64-19</a></div>
+    </div>
   </div></section>
 
   <section class="block"><div class="rand">
@@ -302,19 +349,25 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   </div></section>
 
   <section class="block"><div class="rand">
-    <h2>So wechseln Sie zu Munte</h2>
+    <div class="einleitung"><h2>Der Wechsel zu Munte: vier Schritte, ein fester Plan</h2><p class="text">Wir übernehmen laufend neue Objekte. Deshalb ist die Übernahme bei uns kein Sonderfall, sondern ein eingespielter Ablauf mit Stichtag und Checkliste.</p></div>
     <div class="raster">
       <article class="karte"><span class="nr">1</span><h3>Anfrage</h3><p>Sie nennen uns Objekt, Zahl der Einheiten und Ihren Wunschtermin.</p></article>
       <article class="karte"><span class="nr">2</span><h3>Gespräch und Angebot</h3><p>Wir sehen uns das Haus an und nennen Ihnen einen festen Preis je Einheit.</p></article>
-      <article class="karte"><span class="nr">3</span><h3>Übernahme</h3><p>Wir übernehmen Unterlagen, Verträge und Konten und informieren die Mieter.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Übernahme</h3><p>Wir holen Unterlagen, Verträge und Konten beim bisherigen Verwalter ab und informieren die Mieter. <span class="pruef">Alle Daten werden digital erfasst und geprüft.</span></p></article>
       <article class="karte"><span class="nr">4</span><h3>Laufender Betrieb</h3><p>Ab dem Stichtag sind wir Ansprechpartner für Mieter, Handwerker und Behörden.</p></article>
     </div>
   </div></section>
 
   <section class="block"><div class="rand">
     <div class="einleitung">
-      <h2>Persönlich betreut, digital organisiert</h2>
-      <p class="text">Jeder Vorgang wird bei uns digital geführt, vom ersten Anruf des Mieters bis zur bezahlten Handwerkerrechnung. <span class="pruef">Sie können den Stand jederzeit einsehen.</span> Das macht uns schneller und für Sie nachprüfbar. Was bleibt, ist der persönliche Kontakt: Ihr Verwaltungsteam kennt Ihr Haus.</p>
+      <h2>Saubere Prozesse, die Sie sehen können</h2>
+      <p class="text">Gute Verwaltung zeigt sich im Ablauf. Bei uns hat jeder Vorgang einen Anfang, einen Verantwortlichen, eine Frist und ein dokumentiertes Ende. So läuft zum Beispiel eine Schadensmeldung:</p>
+    </div>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Meldung</h3><p><span class="pruef">Der Mieter meldet den Schaden online oder am Telefon. Die Meldung wird sofort zum Vorgang.</span></p></article>
+      <article class="karte"><span class="nr">2</span><h3>Auftrag</h3><p><span class="pruef">Der passende Handwerker erhält den Auftrag digital, mit Fotos und Kontakt vor Ort.</span></p></article>
+      <article class="karte"><span class="nr">3</span><h3>Kontrolle</h3><p><span class="pruef">Die Frist läuft automatisch mit. Was liegen bleibt, fällt auf, bevor der Mieter nachfragen muss.</span></p></article>
+      <article class="karte"><span class="nr">4</span><h3>Abschluss</h3><p><span class="pruef">Rechnung, Zahlung und Nachweis liegen in der Objektakte. Sie sehen das Ergebnis in Ihrem Bericht.</span></p></article>
     </div>
   </div></section>
 
@@ -330,7 +383,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   </div></section>
 
   <div class="abschluss"><div class="rand">
-    <h2>Angebot für Ihre Mietverwaltung</h2>
+    <h2>Bereit für den Wechsel?</h2>
     <p>Nennen Sie uns Ihr Objekt. Wir melden uns innerhalb von <span class="pruef">zwei Werktagen</span> mit einem Terminvorschlag.</p>
     <div class="knopfzeile"><a class="knopf" href="#kontakt">Angebot anfordern</a></div>
   </div></div>
@@ -341,7 +394,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   <div class="buehne"><div class="rand">
     <p class="kruemel">Für Eigentümer · WEG-Verwaltung</p>
     <h1>WEG-Verwaltung in Braunschweig</h1>
-    <p class="lead">Wir führen Ihre Eigentümergemeinschaft verlässlich durch das Jahr: gut vorbereitete Versammlungen, klare Abrechnungen und Beschlüsse, die umgesetzt werden.</p>
+    <p class="lead">Ihre Gemeinschaft verdient eine Verwaltung, die vorbereitet, abrechnet und umsetzt. Wir übernehmen neue Eigentümergemeinschaften und machen den Verwalterwechsel für Beirat und Eigentümer einfach.</p>
     <div class="knopfzeile">
       <a class="knopf" href="#kontakt">Angebot für Ihre Gemeinschaft</a>
     </div>
@@ -363,7 +416,10 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       <p class="text">In einer Eigentümergemeinschaft treffen viele Interessen aufeinander. Gute Verwaltung sorgt dafür, dass daraus Entscheidungen werden: sachlich vorbereitet, rechtssicher beschlossen und zügig umgesetzt.</p>
       <p class="text">Über 85 Eigentümergemeinschaften in Braunschweig und der Region vertrauen uns diese Aufgabe an. Unsere Verwalterinnen und Verwalter sind zertifiziert und arbeiten eng mit dem Beirat zusammen.</p>
     </div>
-    <div class="ansprech"><div class="bild" aria-hidden="true"></div><div><strong>Leitung WEG-Verwaltung</strong><br><span style="color:var(--leise)">Foto, Name und Direktwahl aus dem bestehenden Auftritt</span></div></div>
+    <div class="ansprech">
+      <img class="portrait" src="https://www.munte-immobilien.de/wp-content/uploads/2026/02/SandraHeller_neu.webp" alt="Porträt von Sandra Heller" loading="lazy" decoding="async">
+      <div><strong>Sandra Heller</strong><span class="rolle">Leitung WEG-Verwaltung</span><a class="direkt" href="tel:+495311206461">0531 120 64-61</a></div>
+    </div>
   </div></section>
 
   <section class="block"><div class="rand">
@@ -379,12 +435,12 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   </div></section>
 
   <section class="block"><div class="rand">
-    <h2>Verwalterwechsel in vier Schritten</h2>
+    <div class="einleitung"><h2>Verwalterwechsel in vier Schritten</h2><p class="text">Wir übernehmen laufend neue Gemeinschaften. Der Wechsel folgt einem festen Plan, und der Beirat weiß zu jedem Zeitpunkt, was als Nächstes passiert.</p></div>
     <div class="raster">
       <article class="karte"><span class="nr">1</span><h3>Kennenlernen</h3><p>Der Beirat schildert die Lage der Gemeinschaft. Wir stellen uns und unsere Arbeitsweise vor.</p></article>
       <article class="karte"><span class="nr">2</span><h3>Angebot</h3><p>Die Gemeinschaft erhält ein Angebot mit Verwaltervertrag zur Vorlage in der Versammlung.</p></article>
       <article class="karte"><span class="nr">3</span><h3>Beschluss</h3><p>Die Eigentümer bestellen Munte als Verwalter. Auf Wunsch stellen wir uns in der Versammlung vor.</p></article>
-      <article class="karte"><span class="nr">4</span><h3>Übergabe</h3><p>Wir übernehmen Unterlagen, Konten und laufende Vorgänge vom bisherigen Verwalter.</p></article>
+      <article class="karte"><span class="nr">4</span><h3>Übergabe</h3><p>Wir übernehmen Unterlagen, Konten und laufende Vorgänge vom bisherigen Verwalter. <span class="pruef">Beschlusssammlung und Belege stehen danach digital bereit.</span></p></article>
     </div>
   </div></section>
 
@@ -407,7 +463,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   </div></section>
 
   <div class="abschluss"><div class="rand">
-    <h2>Angebot für Ihre Eigentümergemeinschaft</h2>
+    <h2>Ihre Gemeinschaft denkt über einen Wechsel nach?</h2>
     <p>Beiräte und Eigentümer erreichen uns direkt. Wir kommen gern zu einem ersten Gespräch ins Haus.</p>
     <div class="knopfzeile"><a class="knopf" href="#kontakt">Angebot anfordern</a></div>
   </div></div>
@@ -418,7 +474,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   <div class="buehne"><div class="rand">
     <p class="kruemel">Für Vermieter · Vermietung und Vermarktung</p>
     <h1>Wohnung vermieten in Braunschweig</h1>
-    <p class="lead">Wir finden den Mieter, der zu Ihrer Wohnung passt: zum richtigen Preis, mit geprüften Unterlagen und ohne Leerstand.</p>
+    <p class="lead">Wir vermieten Ihre Wohnung schnell und richtig: zum marktgerechten Preis, an geprüfte Mieter und mit einem Ablauf, der vom Inserat bis zur Schlüsselübergabe sitzt.</p>
     <div class="knopfzeile">
       <a class="knopf" href="#kontakt">Vermietung anfragen</a>
       <a class="knopf zweit" href="#mietverwaltung">Dauerhaft verwalten lassen</a>
@@ -488,7 +544,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   <div class="buehne"><div class="rand">
     <p class="kruemel">Munte Makler · Kauf und Verkauf</p>
     <h1>Immobilienmakler in Braunschweig</h1>
-    <p class="lead">Wir verkaufen Häuser, Wohnungen und Anlageobjekte in Braunschweig und der Region: mit realistischem Preis, ehrlicher Beratung und Begleitung bis zum Notartermin.</p>
+    <p class="lead">Wir suchen Häuser, Wohnungen und Anlageobjekte in Braunschweig und der Region. Sie bekommen einen realistischen Preis, ehrliche Beratung und Begleitung bis zum Notartermin.</p>
     <div class="knopfzeile">
       <a class="knopf" href="#kontakt">Immobilie bewerten lassen</a>
       <a class="knopf zweit" href="https://www.munte-makler.de/">Aktuelle Angebote ansehen</a>
@@ -554,12 +610,156 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
   </div></div>
 </div>
 
+<!-- ===================== WECHSEL ===================== -->
+<div class="ansicht" id="ansicht-verwalterwechsel">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Für Eigentümer und Beiräte · Verwalterwechsel</p>
+    <h1>Hausverwaltung wechseln in Braunschweig</h1>
+    <p class="lead">Der Wechsel zu Munte folgt einem festen Plan. Wir übernehmen Unterlagen, Konten und laufende Vorgänge, und Sie haben damit keine Arbeit.</p>
+    <div class="knopfzeile">
+      <a class="knopf" href="#kontakt">Wechsel anfragen</a>
+    </div>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › hausverwaltung-wechseln-braunschweig</span>
+      <span class="titel">Hausverwaltung wechseln in Braunschweig | Munte Immobilien</span>
+      <span class="beschr">Verwalterwechsel für Mietshäuser und Eigentümergemeinschaften in Braunschweig: fester Ablauf, digitale Übernahme aller Unterlagen, ein Stichtag. Jetzt Wechsel anfragen.</span>
+      <span class="h1">Hauptüberschrift: „Hausverwaltung wechseln in Braunschweig“ · Suchbegriffe: Hausverwaltung wechseln, Verwalterwechsel Braunschweig</span>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Wechseln ist einfacher, als die meisten denken</h2>
+      <p class="text">Viele Eigentümer bleiben bei einer Verwaltung, mit der sie nicht zufrieden sind, weil sie den Aufwand scheuen. Dieser Aufwand liegt bei uns. Wir übernehmen laufend neue Objekte und haben dafür einen eingespielten Ablauf mit Stichtag und Checkliste.</p>
+    </div>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Gespräch</h3><p>Sie schildern uns Objekt und Lage. Wir prüfen Verträge und Kündigungsfristen und nennen einen realistischen Stichtag.</p></article>
+      <article class="karte"><span class="nr">2</span><h3>Angebot</h3><p>Sie erhalten ein Angebot mit festem Preis je Einheit und einem Übernahmeplan.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Übernahme</h3><p>Wir fordern Unterlagen, Konten und Schlüssel beim bisherigen Verwalter an. <span class="pruef">Alles wird digital erfasst und auf Vollständigkeit geprüft.</span></p></article>
+      <article class="karte"><span class="nr">4</span><h3>Start</h3><p>Zum Stichtag sind Mieter, Eigentümer und Dienstleister informiert. Ab dann läuft jeder Vorgang über uns.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Was wir bei der Übernahme prüfen</h2>
+      <ul class="haken">
+        <li>Mietverträge, Kautionen und offene Forderungen</li>
+        <li>Abrechnungen der letzten Jahre und laufende Fristen</li>
+        <li>Wartungsverträge, Versicherungen und Dienstleister</li>
+        <li>Offene Schäden und angefangene Maßnahmen</li>
+        <li>Bei Gemeinschaften: Beschlusssammlung, Rücklage und Wirtschaftsplan</li>
+      </ul>
+    </div>
+    <div class="einleitung">
+      <h2>Digital übernommen, sauber gestartet</h2>
+      <p class="text"><span class="pruef">Bei der Übernahme entsteht für jedes Objekt eine digitale Akte: Verträge, Zählerstände, Kontakte und offene Vorgänge an einem Ort.</span> Was fehlt, fällt sofort auf und wird nachgefordert. So beginnt die Verwaltung nicht mit einem Stapel Ordner, sondern mit einem geordneten Bestand.</p>
+      <p class="text">Für Sie heißt das: ein Ansprechpartner für die Übernahme, ein Stichtag und ein kurzer Bericht, was wir vorgefunden haben.</p>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Häufige Fragen zum Verwalterwechsel</h2>
+    <div>
+      <details><summary>Wann kann ich meine Hausverwaltung wechseln?</summary><p>Das hängt von Laufzeit und Kündigungsfrist des bestehenden Verwaltervertrags ab. Wir sehen uns den Vertrag an und sagen Ihnen, zu welchem Termin der Wechsel möglich ist.</p></details>
+      <details><summary>Wie lange dauert die Übernahme?</summary><p><span class="pruef">In der Regel wenige Wochen ab Vertragsschluss.</span> Entscheidend ist, wie schnell der bisherige Verwalter die Unterlagen übergibt. Das fordern wir für Sie ein.</p></details>
+      <details><summary>Wie wechselt eine Eigentümergemeinschaft den Verwalter?</summary><p>Die Eigentümerversammlung beschließt die Bestellung des neuen Verwalters. Wir bereiten den Beschluss mit dem Beirat vor. Mehr dazu unter <a href="#weg-verwaltung">WEG-Verwaltung</a>.</p></details>
+      <details><summary>Merken die Mieter etwas vom Wechsel?</summary><p>Sie erhalten ein Schreiben mit den neuen Kontaktdaten und der neuen Bankverbindung. Laufende Anliegen übernehmen wir, damit nichts liegen bleibt.</p></details>
+      <details><summary>Was passiert mit unvollständigen Unterlagen?</summary><p>Das kommt häufig vor. Wir dokumentieren, was fehlt, fordern es nach und bauen den Bestand Schritt für Schritt auf.</p></details>
+    </div>
+  </div></section>
+
+  <div class="abschluss"><div class="rand">
+    <h2>Bereit für den Wechsel?</h2>
+    <p>Nennen Sie uns Ihr Objekt. Wir prüfen den Vertrag und nennen Ihnen einen Stichtag.</p>
+    <div class="knopfzeile"><a class="knopf" href="#kontakt">Wechsel anfragen</a></div>
+  </div></div>
+</div>
+
+<!-- ===================== MIETER ===================== -->
+<div class="ansicht" id="ansicht-fuer-mieter">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Für Mieter und Eigentümer · Service</p>
+    <h1>Service für Mieter</h1>
+    <p class="lead">Schaden melden, Fragen klären, Unterlagen abrufen: Hier erledigen Sie Ihr Anliegen in wenigen Minuten, auch abends und am Wochenende.</p>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › fuer-mieter</span>
+      <span class="titel">Mieterservice Munte Immobilien – Schaden melden, Kontakt</span>
+      <span class="beschr">Service für Mieter von Munte Immobilien in Braunschweig: Schaden online melden, Notdienst, häufige Fragen und Login zu „Mein Zuhause“.</span>
+      <span class="h1">Hauptüberschrift: „Service für Mieter“ · Suchbegriffe: Munte Schaden melden, Munte Mieter Kontakt</span>
+    </div>
+    <p class="text" style="color:var(--leise);font-size:.93rem">Die Webseite zeigt nur die Einstiege. Schadensmeldung und Login laufen im Portal unter eigener Adresse (Vorschlag: mieter.munte-immobilien.de). Die Login-Seiten selbst werden für Suchmaschinen gesperrt.</p>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="notfall">
+      <h3>Notfall?</h3>
+      <p>Bei Wasserrohrbruch, Gasgeruch, Stromausfall im ganzen Haus oder steckengebliebenem Aufzug rufen Sie bitte sofort den Notdienst an: <span class="pruef">Telefonnummer des Notdienstes</span>. Bei Gasgeruch und Feuer zuerst 112.</p>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Schaden melden, ohne Anmeldung <span class="kommt">kommt mit dem Portal</span></h2>
+      <p class="text">Sie brauchen kein Konto und kein Passwort. Drei Angaben genügen, und Ihre Meldung liegt bei der richtigen Stelle.</p>
+    </div>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Wo ist der Schaden?</h3><p>Adresse wählen, dann Wohnung, Treppenhaus, Keller oder Außenanlage.</p></article>
+      <article class="karte"><span class="nr">2</span><h3>Was ist passiert?</h3><p>Kurz beschreiben und ein Foto mit dem Handy hinzufügen.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Wie erreichen wir Sie?</h3><p>Telefon oder E-Mail für Rückfragen und den Handwerkertermin.</p></article>
+    </div>
+    <div class="knopfzeile"><a class="knopf dunkel" href="#fuer-mieter">Schaden melden</a></div>
+    <p class="text" style="color:var(--leise);font-size:.93rem">Entwurf: Der Knopf führt später ins Portal. Sie erhalten eine Bestätigung und sehen, wie es mit Ihrer Meldung weitergeht.</p>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Mein Zuhause: Login für Mieter <span class="kommt">kommt mit dem Portal</span></h2>
+      <ul class="haken">
+        <li>Stand Ihrer Meldungen und Termine</li>
+        <li>Dokumente wie Nebenkostenabrechnung und Bescheinigungen</li>
+        <li>Ihre Ansprechpartner für Haus und Wohnung</li>
+        <li>Am Handy als App, am PC im Browser</li>
+      </ul>
+      <div class="knopfzeile"><a class="knopf dunkel" href="#fuer-mieter">Zum Mieter-Login</a></div>
+    </div>
+    <div class="einleitung">
+      <h2>Login für Eigentümer und Beiräte <span class="kommt">kommt mit dem Portal</span></h2>
+      <ul class="haken">
+        <li>Abrechnungen, Wirtschaftsplan und Protokolle</li>
+        <li>Beschlüsse und ihr Umsetzungsstand</li>
+        <li>Einladung zur Versammlung, Vollmacht und Stimmabgabe</li>
+        <li>Berichte zu Ihrem Objekt</li>
+      </ul>
+      <div class="knopfzeile"><a class="knopf dunkel" href="#fuer-mieter">Zum Eigentümer-Login</a></div>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Häufige Fragen von Mietern</h2>
+    <div>
+      <details><summary>Wie melde ich einen Schaden in meiner Wohnung?</summary><p>Am schnellsten über „Schaden melden“ auf dieser Seite. Sie können uns auch anrufen oder eine E-Mail schreiben.</p></details>
+      <details><summary>Wann bekomme ich meine Nebenkostenabrechnung?</summary><p>Die Abrechnung erhalten Sie spätestens zwölf Monate nach Ende des Abrechnungszeitraums.</p></details>
+      <details><summary>Wie kündige ich meine Wohnung?</summary><p>Die Kündigung muss schriftlich mit Unterschrift bei uns eingehen. Die Frist beträgt in der Regel drei Monate.</p></details>
+      <details><summary>Ich suche eine Wohnung. Wo finde ich Angebote?</summary><p>Unsere aktuellen Mietangebote finden Sie bei <a href="#makler">Munte Makler</a>.</p></details>
+    </div>
+  </div></section>
+</div>
+
 <!-- ===================== KONTAKT ===================== -->
 <div class="ansicht" id="ansicht-kontakt">
   <div class="buehne"><div class="rand">
     <p class="kruemel">Verwaltungsangebot</p>
     <h1>Angebot anfordern</h1>
-    <p class="lead">Drei Angaben genügen. Wir melden uns mit einem Terminvorschlag.</p>
+    <p class="lead">Sie möchten wechseln oder Ihr Objekt erstmals abgeben? Drei Angaben genügen. Wir melden uns mit einem Terminvorschlag und einem Plan für die Übernahme.</p>
   </div></div>
 
   <section class="block"><div class="rand">
@@ -619,13 +819,14 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       <li><a href="#weg-verwaltung">WEG-Verwaltung Braunschweig</a></li>
       <li><a href="#vermietung">Wohnung vermieten</a></li>
       <li><a href="#makler">Immobilie verkaufen</a></li>
+      <li><a href="#verwalterwechsel">Hausverwaltung wechseln</a></li>
       <li><a href="#kontakt">Angebot anfordern</a></li>
     </ul></div>
     <div><h3>Weitere Seiten im Zielbild</h3><ul>
       <li>Sondereigentumsverwaltung</li>
       <li>Gewerbeverwaltung</li>
       <li>Hausverwaltung Wolfsburg · Wolfenbüttel · Salzgitter</li>
-      <li>Für Mieter · Schaden melden</li>
+      <li><a href="#fuer-mieter">Für Mieter · Schaden melden · Login</a></li>
       <li>Ratgeber für Vermieter</li>
       <li>Unternehmen · Geschichte · Karriere</li>
     </ul></div>
@@ -639,7 +840,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 
 <script>
 (function(){
-  var seiten = ["start","mietverwaltung","weg-verwaltung","vermietung","makler","kontakt"];
+  var seiten = ["start","mietverwaltung","weg-verwaltung","vermietung","makler","verwalterwechsel","fuer-mieter","kontakt"];
   function zeige(){
     var name = (location.hash || "#start").slice(1);
     if (seiten.indexOf(name) === -1) name = "start";
