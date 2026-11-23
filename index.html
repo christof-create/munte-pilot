@@ -174,12 +174,13 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       <a href="#vermietung" data-ziel="vermietung">Vermietung</a>
       <a href="#makler" data-ziel="makler">Kauf &amp; Verkauf</a>
       <a href="#verwalterwechsel" data-ziel="verwalterwechsel">Wechsel zu Munte</a>
-      <a href="#fuer-mieter" data-ziel="fuer-mieter">Für Mieter</a>
+      <a href="#service" data-ziel="service">Service</a>
       <a href="#kontakt" data-ziel="kontakt">Angebot anfordern</a>
     </nav>
     <div class="schnell" aria-label="Schnellzugriff">
-      <a class="voll" href="#fuer-mieter">Schaden melden</a>
-      <a href="#fuer-mieter">Login für Mieter und Eigentümer</a>
+      <a class="voll" href="#schaden-melden">Schaden melden</a>
+      <a href="#mieter-login">Mieter-Login</a>
+      <a href="#eigentuemer-login">Eigentümer-Login</a>
     </div>
   </div>
 </header>
@@ -681,20 +682,20 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 </div>
 
 <!-- ===================== MIETER ===================== -->
-<div class="ansicht" id="ansicht-fuer-mieter">
+<div class="ansicht" id="ansicht-service">
   <div class="buehne"><div class="rand">
-    <p class="kruemel">Für Mieter und Eigentümer · Service</p>
-    <h1>Service für Mieter</h1>
-    <p class="lead">Schaden melden, Fragen klären, Unterlagen abrufen: Hier erledigen Sie Ihr Anliegen in wenigen Minuten, auch abends und am Wochenende.</p>
+    <p class="kruemel">Kundenservice</p>
+    <h1>Service für Mieter und Eigentümer</h1>
+    <p class="lead">Hier finden Mieter Informationen zur Schadensmeldung und zu ihrem Mietvertrag. Eigentümer und Beiräte finden ihren eigenen Zugang zu Abrechnungen, Beschlüssen und Protokollen.</p>
   </div></div>
 
   <section class="block"><div class="rand">
     <div class="google">
       <span class="schild">So erscheint die Seite bei Google</span>
-      <span class="adresse">www.munte-immobilien.de › fuer-mieter</span>
-      <span class="titel">Mieterservice Munte Immobilien – Schaden melden, Kontakt</span>
-      <span class="beschr">Service für Mieter von Munte Immobilien in Braunschweig: Schaden online melden, Notdienst, häufige Fragen und Login zu „Mein Zuhause“.</span>
-      <span class="h1">Hauptüberschrift: „Service für Mieter“ · Suchbegriffe: Munte Schaden melden, Munte Mieter Kontakt</span>
+      <span class="adresse">www.munte-immobilien.de › service</span>
+      <span class="titel">Kundenservice Munte Immobilien – Schaden melden und Portalzugänge</span>
+      <span class="beschr">Schaden melden, Antworten auf Mieterfragen finden oder direkt den Portalzugang für Eigentümer und Beiräte aufrufen.</span>
+      <span class="h1">Hauptüberschrift: „Service für Mieter und Eigentümer“ · Suchbegriffe: Munte Schaden melden, Mieter-Login, Eigentümer-Login</span>
     </div>
     <p class="text" style="color:var(--leise);font-size:.93rem">Die Webseite zeigt nur die Einstiege. Schadensmeldung und Login laufen im Portal unter eigener Adresse (Vorschlag: mieter.munte-immobilien.de). Die Login-Seiten selbst werden für Suchmaschinen gesperrt.</p>
   </div></section>
@@ -708,7 +709,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 
   <section class="block"><div class="rand">
     <div class="einleitung">
-      <h2>Schaden melden, ohne Anmeldung <span class="kommt">kommt mit dem Portal</span></h2>
+      <h2 id="schaden-melden">Schaden melden, ohne Anmeldung <span class="kommt">kommt mit dem Portal</span></h2>
       <p class="text">Sie brauchen kein Konto und kein Passwort. Drei Angaben genügen, und Ihre Meldung liegt bei der richtigen Stelle.</p>
     </div>
     <div class="raster">
@@ -716,30 +717,30 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       <article class="karte"><span class="nr">2</span><h3>Was ist passiert?</h3><p>Kurz beschreiben und ein Foto mit dem Handy hinzufügen.</p></article>
       <article class="karte"><span class="nr">3</span><h3>Wie erreichen wir Sie?</h3><p>Telefon oder E-Mail für Rückfragen und den Handwerkertermin.</p></article>
     </div>
-    <div class="knopfzeile"><a class="knopf dunkel" href="#fuer-mieter">Schaden melden</a></div>
-    <p class="text" style="color:var(--leise);font-size:.93rem">Entwurf: Der Knopf führt später ins Portal. Sie erhalten eine Bestätigung und sehen, wie es mit Ihrer Meldung weitergeht.</p>
+    <p class="text" style="color:var(--leise);font-size:.93rem">Die Online-Schadensmeldung wird mit dem Portal freigeschaltet. Sie erhalten eine Bestätigung und sehen, wie es mit Ihrer Meldung weitergeht.</p>
   </div></section>
 
-  <section class="block"><div class="rand zwei">
+  <section class="block"><div class="rand">
     <div class="einleitung">
-      <h2>Mein Zuhause: Login für Mieter <span class="kommt">kommt mit dem Portal</span></h2>
+      <h2 id="mieter-login">Mein Zuhause – Login für Mieter <span class="kommt">kommt mit dem Portal</span></h2>
       <ul class="haken">
         <li>Stand Ihrer Meldungen und Termine</li>
         <li>Dokumente wie Nebenkostenabrechnung und Bescheinigungen</li>
         <li>Ihre Ansprechpartner für Haus und Wohnung</li>
         <li>Am Handy als App, am PC im Browser</li>
       </ul>
-      <div class="knopfzeile"><a class="knopf dunkel" href="#fuer-mieter">Zum Mieter-Login</a></div>
     </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
     <div class="einleitung">
-      <h2>Login für Eigentümer und Beiräte <span class="kommt">kommt mit dem Portal</span></h2>
+      <h2 id="eigentuemer-login">Login für Eigentümer und Beiräte <span class="kommt">kommt mit dem Portal</span></h2>
       <ul class="haken">
         <li>Abrechnungen, Wirtschaftsplan und Protokolle</li>
         <li>Beschlüsse und ihr Umsetzungsstand</li>
         <li>Einladung zur Versammlung, Vollmacht und Stimmabgabe</li>
         <li>Berichte zu Ihrem Objekt</li>
       </ul>
-      <div class="knopfzeile"><a class="knopf dunkel" href="#fuer-mieter">Zum Eigentümer-Login</a></div>
     </div>
   </div></section>
 
@@ -826,7 +827,7 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       <li>Sondereigentumsverwaltung</li>
       <li>Gewerbeverwaltung</li>
       <li>Hausverwaltung Wolfsburg · Wolfenbüttel · Salzgitter</li>
-      <li><a href="#fuer-mieter">Für Mieter · Schaden melden · Login</a></li>
+      <li><a href="#service">Service für Mieter und Eigentümer</a></li>
       <li>Ratgeber für Vermieter</li>
       <li>Unternehmen · Geschichte · Karriere</li>
     </ul></div>
@@ -840,9 +841,11 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
 
 <script>
 (function(){
-  var seiten = ["start","mietverwaltung","weg-verwaltung","vermietung","makler","verwalterwechsel","fuer-mieter","kontakt"];
+  var seiten = ["start","mietverwaltung","weg-verwaltung","vermietung","makler","verwalterwechsel","service","kontakt"];
   function zeige(){
-    var name = (location.hash || "#start").slice(1);
+    var ziel = (location.hash || "#start").slice(1);
+    var abschnitt = ["schaden-melden","mieter-login","eigentuemer-login"].includes(ziel) ? document.getElementById(ziel) : null;
+    var name = abschnitt || ziel === "fuer-mieter" ? "service" : ziel;
     if (seiten.indexOf(name) === -1) name = "start";
     seiten.forEach(function(s){
       document.getElementById("ansicht-" + s).classList.toggle("aktiv", s === name);
@@ -851,7 +854,14 @@ footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
       if (a.getAttribute("data-ziel") === name) a.setAttribute("aria-current","page");
       else a.removeAttribute("aria-current");
     });
-    window.scrollTo(0,0);
+    if (abschnitt) {
+      var kopf = document.querySelector("header.kopf");
+      var abstand = getComputedStyle(kopf).position === "sticky" ? kopf.offsetHeight : 0;
+      abschnitt.style.scrollMarginTop = (abstand + 16) + "px";
+      abschnitt.scrollIntoView({block:"start", behavior:"instant"});
+    } else {
+      window.scrollTo({top:0, behavior:"instant"});
+    }
   }
   window.addEventListener("hashchange", zeige);
   zeige();
