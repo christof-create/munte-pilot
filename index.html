@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pilotseite Munte Seitenstruktur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: ruhige Firmenseite, eine Spalte mit breitem Rand, je Leistung eine eigene Ansicht (Hash-Route).
+   Eine Farbwelt (hell), bewusst ohne Dunkelmodus: Entwurf einer Firmenwebseite. */
+:root{
+  color-scheme: light;
+  --grund:#f3f6f6;      /* Seitenhintergrund, kühl */
+  --flaeche:#ffffff;    /* Karten */
+  --tinte:#13232c;      /* Text */
+  --leise:#51646e;      /* Nebentext */
+  --linie:#d5dee1;      /* Trennlinien */
+  --petrol:#1f5c3d;     /* Akzent (Grün), Knöpfe, Links */
+  --petrol-tief:#153f2a;
+  --messing:#a8842f;    /* kleine Auszeichnung */
+  --hinweis:#fff4d6;    /* Entwurfsband */
+  --schrift-titel:"IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  --schrift-text:"IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:var(--schrift-text);font-size:17px;line-height:1.6}
+a{color:var(--petrol)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--messing);outline-offset:2px}
+h1,h2,h3{font-family:var(--schrift-titel);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5vw,3.4rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.55rem,3vw,2.1rem)}
+h3{font-size:1.25rem}
+p{margin:0}
+.rand{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* Entwurfsband */
+.entwurf{background:var(--hinweis);border-bottom:1px solid #e6d59a;font-size:.86rem;line-height:1.45}
+.entwurf .rand{display:flex;flex-wrap:wrap;gap:6px 18px;padding-top:9px;padding-bottom:9px}
+.entwurf strong{font-weight:600}
+.pruef{border-bottom:2px dashed var(--messing)}
+
+/* Kopf */
+header.kopf{background:var(--flaeche);border-bottom:1px solid var(--linie);position:sticky;top:0;z-index:5}
+.kopf .rand{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding-top:14px;padding-bottom:14px}
+.marke{font-family:var(--schrift-titel);font-size:1.45rem;font-weight:600;color:var(--tinte);text-decoration:none;letter-spacing:.01em}
+.marke small{display:block;font-family:var(--schrift-text);font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--leise)}
+nav.haupt{display:flex;flex-wrap:wrap;gap:4px 6px;margin-left:auto}
+nav.haupt a{padding:8px 12px;border-radius:6px;text-decoration:none;color:var(--tinte);font-weight:500;font-size:.95rem}
+nav.haupt a:hover{background:var(--grund)}
+nav.haupt a[aria-current="page"]{background:var(--petrol);color:#fff}
+
+/* Ansichten */
+.ansicht{display:none}
+.ansicht.aktiv{display:block}
+.buehne{background:var(--petrol-tief);color:#fff}
+.buehne .rand{padding-top:56px;padding-bottom:56px;display:grid;gap:22px}
+.buehne p.lead{font-size:1.2rem;max-width:62ch;color:#dbe8eb}
+.kruemel{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#a9cdb8}
+.knopfzeile{display:flex;flex-wrap:wrap;gap:12px}
+.knopf{display:inline-block;padding:12px 20px;border-radius:6px;background:#fff;color:var(--petrol-tief);font-weight:600;text-decoration:none;border:2px solid #fff}
+.knopf.zweit{background:transparent;color:#fff;border-color:#86b39a}
+.knopf.dunkel{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+section.block{padding:54px 0}
+section.block + section.block{border-top:1px solid var(--linie)}
+.block .rand{display:grid;gap:26px}
+.block p.text{max-width:66ch}
+.block .einleitung{display:grid;gap:12px}
+.raster{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.karte{background:var(--flaeche);border:1px solid var(--linie);border-radius:8px;padding:22px;display:grid;gap:8px;align-content:start}
+.karte p{color:var(--leise);font-size:.97rem}
+.karte .nr{font-family:var(--schrift-titel);font-size:1.7rem;color:var(--messing);line-height:1}
+.weg{border-top:4px solid var(--petrol)}
+.weg a.mehr{font-weight:600;text-decoration:none}
+.zahlen{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.zahl{border-left:3px solid var(--messing);padding-left:14px}
+.zahl b{display:block;font-family:var(--schrift-titel);font-weight:500;font-size:2.1rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.zahl span{color:var(--leise);font-size:.93rem}
+.zwei{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
+ul.haken{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.haken li{padding-left:28px;position:relative}
+ul.haken li::before{content:"";position:absolute;left:4px;top:.5em;width:12px;height:6px;border-left:2px solid var(--petrol);border-bottom:2px solid var(--petrol);transform:rotate(-45deg)}
+details{background:var(--flaeche);border:1px solid var(--linie);border-radius:8px;padding:0 20px}
+details + details{margin-top:10px}
+summary{cursor:pointer;font-weight:600;padding:16px 0}
+details p{padding:0 0 18px;color:var(--leise);max-width:70ch}
+.stimme{position:relative}
+.stimme .muster{justify-self:start;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#6b5312;background:var(--hinweis);border:1px solid #e6d59a;border-radius:4px;padding:2px 8px}
+.stimme blockquote{margin:0;font-family:var(--schrift-titel);font-size:1.12rem;line-height:1.45;color:var(--tinte)}
+.stimme .wer{font-size:.9rem;color:var(--leise)}
+.platzhalter{border:2px dashed var(--linie);border-radius:8px;padding:22px;color:var(--leise);background:transparent}
+.ansprech{display:flex;gap:16px;align-items:center;background:var(--flaeche);border:1px solid var(--linie);border-radius:8px;padding:18px}
+.ansprech .bild{width:68px;height:68px;border-radius:50%;flex:none;border:2px solid var(--linie);background:#dfe9e3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 68'%3E%3Ccircle cx='34' cy='26' r='12' fill='%2386b39a'/%3E%3Cpath d='M10 68c2-18 12-26 24-26s22 8 24 26z' fill='%2386b39a'/%3E%3C/svg%3E") center/cover}
+.bildfeld{height:130px;border-radius:6px;background-color:#dfe9e3;background-size:cover;background-position:center;position:relative;margin-bottom:4px}
+.bildfeld span{position:absolute;left:8px;bottom:8px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#6b5312;background:var(--hinweis);border:1px solid #e6d59a;border-radius:4px;padding:1px 6px}
+.b1{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 130'%3E%3Crect x='95' y='22' width='130' height='108' fill='%2386b39a'/%3E%3Cg fill='%23f3f6f6'%3E%3Crect x='110' y='36' width='22' height='22'/%3E%3Crect x='149' y='36' width='22' height='22'/%3E%3Crect x='188' y='36' width='22' height='22'/%3E%3Crect x='110' y='70' width='22' height='22'/%3E%3Crect x='149' y='70' width='22' height='22'/%3E%3Crect x='188' y='70' width='22' height='22'/%3E%3C/g%3E%3Crect x='149' y='102' width='22' height='28' fill='%231f5c3d'/%3E%3Crect x='40' y='60' width='55' height='70' fill='%23b7d2c2'/%3E%3Crect x='225' y='48' width='55' height='82' fill='%23b7d2c2'/%3E%3C/svg%3E")}
+.b2{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 130'%3E%3Cg fill='%2386b39a'%3E%3Ccircle cx='95' cy='62' r='14'/%3E%3Cpath d='M67 130c2-30 13-42 28-42s26 12 28 42z'/%3E%3Ccircle cx='225' cy='62' r='14'/%3E%3Cpath d='M197 130c2-30 13-42 28-42s26 12 28 42z'/%3E%3C/g%3E%3Cg fill='%231f5c3d'%3E%3Ccircle cx='160' cy='52' r='16'/%3E%3Cpath d='M128 130c2-34 15-48 32-48s30 14 32 48z'/%3E%3C/g%3E%3C/svg%3E")}
+.b3{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 130'%3E%3Crect x='190' y='20' width='70' height='110' fill='%2386b39a'/%3E%3Ccircle cx='248' cy='78' r='4' fill='%23f3f6f6'/%3E%3Ccircle cx='110' cy='54' r='20' fill='%231f5c3d'/%3E%3Crect x='90' y='54' width='40' height='26' fill='%231f5c3d'/%3E%3Ccircle cx='110' cy='56' r='13' fill='%23c9dccf'/%3E%3Cpath d='M78 130c2-32 14-46 32-46s30 14 32 46z' fill='%231f5c3d'/%3E%3Ccircle cx='160' cy='96' r='6' fill='none' stroke='%23a8842f' stroke-width='3'/%3E%3Cpath d='M166 96h16m-5 0v6' stroke='%23a8842f' stroke-width='3' fill='none'/%3E%3C/svg%3E")}
+.b4{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 130'%3E%3Cpath d='M175 70l50-40 50 40z' fill='%231f5c3d'/%3E%3Crect x='185' y='70' width='80' height='60' fill='%2386b39a'/%3E%3Crect x='215' y='95' width='20' height='35' fill='%23f3f6f6'/%3E%3Ccircle cx='100' cy='56' r='13' fill='%23c9dccf'/%3E%3Cpath d='M87 52a13 13 0 0 1 26 0z' fill='%23153f2a'/%3E%3Cpath d='M68 130c2-32 14-46 32-46s30 14 32 46z' fill='%23153f2a'/%3E%3C/svg%3E")}
+.abschluss{background:var(--petrol-tief);color:#fff}
+.abschluss .rand{padding-top:48px;padding-bottom:48px;display:grid;gap:16px}
+.abschluss p{color:#dbe8eb;max-width:60ch}
+
+/* Google-Vorschau */
+.google{background:var(--flaeche);border:1px solid var(--linie);border-radius:8px;padding:18px 20px;display:grid;gap:4px}
+.google .schild{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--messing);font-weight:600;margin-bottom:6px}
+.google .adresse{font-size:.85rem;color:var(--leise);overflow-wrap:anywhere}
+.google .titel{font-size:1.2rem;color:#1a0dab;font-family:Arial,sans-serif;line-height:1.3}
+.google .beschr{font-size:.92rem;color:#4d5156;font-family:Arial,sans-serif;max-width:70ch}
+.google .h1{font-size:.85rem;color:var(--leise);margin-top:6px}
+
+/* Formular */
+form.anfrage{display:grid;gap:14px;background:var(--flaeche);border:1px solid var(--linie);border-radius:8px;padding:24px}
+form.anfrage label{display:grid;gap:5px;font-weight:500;font-size:.93rem}
+form.anfrage input,form.anfrage textarea,form.anfrage select{font:inherit;padding:10px 12px;border:1px solid #b8c5c9;border-radius:6px;background:#fff;color:var(--tinte);width:100%}
+form.anfrage button{font:inherit;cursor:pointer}
+#anfrage-meldung{font-size:.93rem;color:var(--leise)}
+
+footer.fuss{background:var(--tinte);color:#c7d3d8;font-size:.92rem}
+.fuss .rand{padding-top:40px;padding-bottom:40px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.fuss a{color:#fff;text-decoration:none}
+.fuss a:hover{text-decoration:underline}
+.fuss h3{font-family:var(--schrift-text);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#8fa4ad;font-weight:600;margin-bottom:10px}
+.fuss ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+@media (max-width:640px){
+  header.kopf{position:static}
+  nav.haupt{margin-left:0}
+  .buehne .rand{padding-top:38px;padding-bottom:38px}
+  section.block{padding:38px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="entwurf" role="note">
+  <div class="rand">
+    <span><strong>Entwurf · nicht die Webseite von Munte Immobilien.</strong> Strukturvorschlag von CS Consulting zur Abstimmung.</span>
+    <span>Eigenes, neutrales Layout. Fotos, Logo und Farben kommen aus dem bestehenden Auftritt.</span>
+    <span><span class="pruef">Gestrichelt unterstrichen</span> = von Munte zu bestätigen.</span>
+  </div>
+</div>
+
+<header class="kopf">
+  <div class="rand">
+    <a class="marke" href="#start">Munte Immobilien<small>Braunschweig · seit 1960</small></a>
+    <nav class="haupt" aria-label="Hauptmenü">
+      <a href="#start" data-ziel="start">Start</a>
+      <a href="#mietverwaltung" data-ziel="mietverwaltung">Mietverwaltung</a>
+      <a href="#weg-verwaltung" data-ziel="weg-verwaltung">WEG-Verwaltung</a>
+      <a href="#vermietung" data-ziel="vermietung">Vermietung</a>
+      <a href="#makler" data-ziel="makler">Kauf &amp; Verkauf</a>
+      <a href="#kontakt" data-ziel="kontakt">Angebot anfordern</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== START ===================== -->
+<div class="ansicht aktiv" id="ansicht-start">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Hausverwaltung · Vermietung · Makler</p>
+    <h1>Ihre Hausverwaltung in Braunschweig</h1>
+    <p class="lead">Miet- und WEG-Verwaltung, Vermietung und Verkauf aus einer Hand. Seit 1960 kümmern wir uns um Immobilien in Braunschweig und der Region: vor Ort für Sie da, sauber abgerechnet, digital organisiert.</p>
+    <div class="knopfzeile">
+      <a class="knopf" href="#kontakt">Angebot anfordern</a>
+      <a class="knopf zweit" href="#mietverwaltung">Zur Mietverwaltung</a>
+    </div>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de</span>
+      <span class="titel">Hausverwaltung Braunschweig | Munte Immobilien – seit 1960</span>
+      <span class="beschr">Miet- und WEG-Verwaltung, Vermietung und Verkauf in Braunschweig, Wolfsburg, Wolfenbüttel und Salzgitter. Vor Ort für Sie da, klare Abrechnungen. Jetzt Angebot anfordern.</span>
+      <span class="h1">Hauptüberschrift: „Ihre Hausverwaltung in Braunschweig“ · Suchbegriff: Hausverwaltung Braunschweig</span>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Vier Leistungen, vier klare Wege</h2>
+      <p class="text">Jede Leistung hat eine eigene Seite mit eigenem Ansprechpartner. So finden Sie schnell, was Sie brauchen.</p>
+    </div>
+    <div class="raster">
+      <article class="karte weg"><div class="bildfeld b1" role="img" aria-label="Beispielbild: Mehrfamilienhaus"><span>Beispielbild</span></div><h3>Mietverwaltung</h3><p>Für Eigentümer von Mehrfamilienhäusern, Wohn- und Geschäftshäusern: Mieter, Miete, Abrechnung und Instandhaltung in einer Hand.</p><a class="mehr" href="#mietverwaltung">Mietverwaltung in Braunschweig →</a></article>
+      <article class="karte weg"><div class="bildfeld b2" role="img" aria-label="Beispielbild: Eigentümer im Gespräch"><span>Beispielbild</span></div><h3>WEG-Verwaltung</h3><p>Für Eigentümergemeinschaften: Versammlung, Wirtschaftsplan, Jahresabrechnung und Umsetzung der Beschlüsse.</p><a class="mehr" href="#weg-verwaltung">WEG-Verwaltung in Braunschweig →</a></article>
+      <article class="karte weg"><div class="bildfeld b3" role="img" aria-label="Beispielbild: Schlüsselübergabe"><span>Beispielbild</span></div><h3>Vermietung</h3><p>Für Vermieter, die den passenden Mieter suchen: Mietpreis, Exposé, Besichtigung, Bonitätsprüfung und Übergabe.</p><a class="mehr" href="#vermietung">Wohnung vermieten in Braunschweig →</a></article>
+      <article class="karte weg"><div class="bildfeld b4" role="img" aria-label="Beispielbild: Berater vor einem Haus"><span>Beispielbild</span></div><h3>Kauf &amp; Verkauf</h3><p>Für Verkäufer und Käufer: Bewertung, Vermarktung und Begleitung bis zum Notartermin durch Munte Makler.</p><a class="mehr" href="#makler">Immobilienmakler in Braunschweig →</a></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Munte in Zahlen</h2>
+    <div class="zahlen">
+      <div class="zahl"><b>seit 1960</b><span>im Immobiliengeschäft in Braunschweig</span></div>
+      <div class="zahl"><b><span class="pruef">über 2.000</span></b><span>verwaltete Einheiten</span></div>
+      <div class="zahl"><b>über 85</b><span>Eigentümergemeinschaften</span></div>
+      <div class="zahl"><b>350 Mio. €</b><span>betreutes Immobilienvermögen</span></div>
+      <div class="zahl"><b><span class="pruef">00</span></b><span>Mitarbeiterinnen und Mitarbeiter</span></div>
+    </div>
+    <p class="text" style="color:var(--leise);font-size:.93rem">Die Zahlen stehen als fester Text auf der Seite. So kann Google sie lesen.</p>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Verlässlich aus Überzeugung. Modern aus Verantwortung.</h2>
+      <p class="text">Munte ist als Familienunternehmen gewachsen. Wir verwalten Immobilien so, wie wir es für unsere eigenen tun: mit langem Atem, mit einem Team vor Ort und mit Abrechnungen, die man versteht.</p>
+      <p class="text">Dazu gehört heute, dass Abläufe digital laufen. Eine Meldung geht nicht verloren, eine Frist wird nicht übersehen, und Sie sehen jederzeit, wo Ihr Anliegen steht. Die Technik arbeitet im Hintergrund. Im Vordergrund steht ein Mensch, der Ihr Haus kennt.</p>
+    </div>
+    <ul class="haken">
+      
+      <li><strong>Verständliche Abrechnungen</strong>, pünktlich und nachvollziehbar</li>
+      <li><strong>Kurze Wege</strong> zu Handwerkern aus der Region</li>
+      <li><span class="pruef"><strong>Digitale Vorgänge</strong>: jede Meldung mit Status und Frist</span></li>
+      <li><span class="pruef"><strong>Online-Zugang</strong> zu Unterlagen für Eigentümer</span></li>
+      <li><strong>Zertifizierte Verwalterinnen und Verwalter</strong> in der WEG-Verwaltung</li>
+    </ul>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Das sagen Eigentümer</h2>
+    <div class="raster">
+      <article class="karte stimme"><span class="muster">Beispieltext</span><blockquote>„Seit Munte unser Haus verwaltet, bekomme ich einmal im Quartal eine Übersicht, die ich auf Anhieb verstehe. Wenn etwas ist, weiß das Team sofort, worum es geht.“</blockquote><p class="wer">Vorname Nachname · Eigentümerin eines Mehrfamilienhauses, Braunschweig</p></article>
+      <article class="karte stimme"><span class="muster">Beispieltext</span><blockquote>„Der Verwalterwechsel war in wenigen Wochen erledigt. Die erste Versammlung war so gut vorbereitet, dass wir nach neunzig Minuten fertig waren.“</blockquote><p class="wer">Vorname Nachname · Beiratsvorsitzender einer Eigentümergemeinschaft, Wolfenbüttel</p></article>
+      <article class="karte stimme"><span class="muster">Beispieltext</span><blockquote>„Die Wohnung war am Tag nach dem Auszug wieder vermietet. Ich musste mich um nichts kümmern und kannte trotzdem jeden Schritt.“</blockquote><p class="wer">Vorname Nachname · Vermieter einer Eigentumswohnung, Braunschweig</p></article>
+    </div>
+    <div class="platzhalter">Die drei Texte oben sind Muster und zeigen nur Form und Länge. Auf die echte Seite gehören ausschließlich echte Stimmen von Kunden, mit Namen, Ort und Einverständnis, dazu der Verweis auf die Google-Bewertungen.</div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Weitere Geschäftsfelder</h2>
+      <p class="text">Family Office, Property Management für Gewerbe, Ankauf, Projektentwicklung und Munte Maler bleiben erhalten. Sie stehen auf der Startseite bewusst unter den vier Hauptwegen und bekommen jeweils eine eigene Seite.</p>
+    </div>
+  </div></section>
+</div>
+
+<!-- ===================== MIETVERWALTUNG ===================== -->
+<div class="ansicht" id="ansicht-mietverwaltung">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Für Eigentümer · Mietverwaltung</p>
+    <h1>Mietverwaltung in Braunschweig</h1>
+    <p class="lead">Wir kümmern uns um Mieter, Miete und Haus. Sie behalten den Überblick und gewinnen Zeit zurück.</p>
+    <div class="knopfzeile">
+      <a class="knopf" href="#kontakt">Angebot anfordern</a>
+      <a class="knopf zweit" href="#vermietung">Nur einen Mieter finden?</a>
+    </div>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › mietverwaltung-braunschweig</span>
+      <span class="titel">Mietverwaltung Braunschweig | Munte Immobilien – seit 1960</span>
+      <span class="beschr">Mietverwaltung in Braunschweig für Mehrfamilienhäuser und Wohnanlagen: Mietersuche, Mieteingang, Nebenkostenabrechnung, Instandhaltung. Team vor Ort in Braunschweig. Jetzt Angebot anfordern.</span>
+      <span class="h1">Hauptüberschrift: „Mietverwaltung in Braunschweig“ · Suchbegriff: Mietverwaltung Braunschweig</span>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Ihr Haus in guten Händen</h2>
+      <p class="text">Ein Mietshaus zu besitzen ist eine gute Sache. Es zu verwalten kostet Zeit: Mieter rufen an, die Heizung fällt aus, die Nebenkostenabrechnung ist fällig, eine Wohnung wird frei. Als Mietverwaltung in Braunschweig nehmen wir Ihnen diese Arbeit ab.</p>
+      <p class="text">Sie entscheiden über das Wesentliche, etwa über größere Investitionen. Alles andere erledigen wir und berichten Ihnen regelmäßig, klar und in Zahlen.</p>
+    </div>
+    <div class="ansprech"><div class="bild" aria-hidden="true"></div><div><strong>Leitung Mietverwaltung</strong><br><span style="color:var(--leise)">Foto, Name und Direktwahl aus dem bestehenden Auftritt</span></div></div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Was unsere Mietverwaltung leistet</h2>
+    <div class="raster">
+      <article class="karte"><h3>Mieter finden und auswählen</h3><p>Wir vermieten freie Wohnungen zum marktgerechten Preis, prüfen Bonität und Unterlagen und schließen den Mietvertrag.</p></article>
+      <article class="karte"><h3>Mieteingang und Mahnwesen</h3><p>Wir überwachen jeden Zahlungseingang, mahnen rechtzeitig und setzen Mietanpassungen im gesetzlichen Rahmen um.</p></article>
+      <article class="karte"><h3>Nebenkostenabrechnung</h3><p>Fristgerecht, vollständig und verständlich. Rückfragen der Mieter beantworten wir direkt.</p></article>
+      <article class="karte"><h3>Instandhaltung</h3><p>Wir nehmen Schäden auf, holen Angebote ein, beauftragen Handwerker aus der Region und kontrollieren die Ausführung.</p></article>
+      <article class="karte"><h3>Mieterwechsel</h3><p>Kündigung, Wohnungsabnahme, Zählerstände, Kaution und Neuvermietung greifen ineinander, damit kein Leerstand entsteht.</p></article>
+      <article class="karte"><h3>Bericht für Eigentümer</h3><p>Sie erhalten regelmäßig eine Übersicht über Einnahmen, Ausgaben, Leerstand und anstehende Maßnahmen.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Für wen wir verwalten</h2>
+      <ul class="haken">
+        <li><strong>Private Vermieter</strong> mit einem oder mehreren Mehrfamilienhäusern</li>
+        <li><strong>Erbengemeinschaften</strong>, die eine neutrale, verlässliche Stelle brauchen</li>
+        <li><strong>Investoren und Family Offices</strong> mit Beständen in der Region</li>
+        <li><strong>Eigentümer von Wohn- und Geschäftshäusern</strong> mit gemischter Nutzung</li>
+      </ul>
+      <p class="text">Sie besitzen eine einzelne vermietete Eigentumswohnung? Dann ist die Sondereigentumsverwaltung der richtige Weg. Sprechen Sie uns an.</p>
+    </div>
+    <div class="zahlen">
+      <div class="zahl"><b>seit 1960</b><span>Erfahrung in Braunschweig</span></div>
+      <div class="zahl"><b><span class="pruef">über 2.000</span></b><span>Einheiten in der Verwaltung</span></div>
+      <div class="zahl"><b>350 Mio. €</b><span>betreutes Immobilienvermögen</span></div>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>So wechseln Sie zu Munte</h2>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Anfrage</h3><p>Sie nennen uns Objekt, Zahl der Einheiten und Ihren Wunschtermin.</p></article>
+      <article class="karte"><span class="nr">2</span><h3>Gespräch und Angebot</h3><p>Wir sehen uns das Haus an und nennen Ihnen einen festen Preis je Einheit.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Übernahme</h3><p>Wir übernehmen Unterlagen, Verträge und Konten und informieren die Mieter.</p></article>
+      <article class="karte"><span class="nr">4</span><h3>Laufender Betrieb</h3><p>Ab dem Stichtag sind wir Ansprechpartner für Mieter, Handwerker und Behörden.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Persönlich betreut, digital organisiert</h2>
+      <p class="text">Jeder Vorgang wird bei uns digital geführt, vom ersten Anruf des Mieters bis zur bezahlten Handwerkerrechnung. <span class="pruef">Sie können den Stand jederzeit einsehen.</span> Das macht uns schneller und für Sie nachprüfbar. Was bleibt, ist der persönliche Kontakt: Ihr Verwaltungsteam kennt Ihr Haus.</p>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Häufige Fragen zur Mietverwaltung</h2>
+    <div>
+      <details><summary>Was kostet eine Mietverwaltung in Braunschweig?</summary><p>Die Vergütung richtet sich nach Größe, Zustand und Lage des Objekts und wird je Einheit und Monat vereinbart. <span class="pruef">Sie erhalten von uns ein festes Angebot ohne versteckte Nebenkosten.</span></p></details>
+      <details><summary>Wie schnell können Sie die Verwaltung übernehmen?</summary><p>In der Regel zum nächsten Monatsersten nach Vertragsschluss. Entscheidend ist, wie schnell die Unterlagen des bisherigen Verwalters vorliegen. Darum kümmern wir uns.</p></details>
+      <details><summary>Was ist der Unterschied zwischen Mietverwaltung und WEG-Verwaltung?</summary><p>Die Mietverwaltung arbeitet für den Eigentümer eines vermieteten Hauses. Die <a href="#weg-verwaltung">WEG-Verwaltung</a> arbeitet für die Gemeinschaft aller Wohnungseigentümer eines Hauses.</p></details>
+      <details><summary>Verwalten Sie auch außerhalb von Braunschweig?</summary><p>Ja. Wir betreuen Objekte in Braunschweig, Wolfsburg, Wolfenbüttel, Salzgitter und im Umland.</p></details>
+      <details><summary>Kann ich nur die Vermietung einer Wohnung beauftragen?</summary><p>Ja. Wenn Sie selbst verwalten und nur einen neuen Mieter suchen, übernehmen wir die <a href="#vermietung">Vermietung</a> als einzelne Leistung.</p></details>
+    </div>
+  </div></section>
+
+  <div class="abschluss"><div class="rand">
+    <h2>Angebot für Ihre Mietverwaltung</h2>
+    <p>Nennen Sie uns Ihr Objekt. Wir melden uns innerhalb von <span class="pruef">zwei Werktagen</span> mit einem Terminvorschlag.</p>
+    <div class="knopfzeile"><a class="knopf" href="#kontakt">Angebot anfordern</a></div>
+  </div></div>
+</div>
+
+<!-- ===================== WEG ===================== -->
+<div class="ansicht" id="ansicht-weg-verwaltung">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Für Eigentümer · WEG-Verwaltung</p>
+    <h1>WEG-Verwaltung in Braunschweig</h1>
+    <p class="lead">Wir führen Ihre Eigentümergemeinschaft verlässlich durch das Jahr: gut vorbereitete Versammlungen, klare Abrechnungen und Beschlüsse, die umgesetzt werden.</p>
+    <div class="knopfzeile">
+      <a class="knopf" href="#kontakt">Angebot für Ihre Gemeinschaft</a>
+    </div>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › weg-verwaltung-braunschweig</span>
+      <span class="titel">WEG-Verwaltung Braunschweig | Munte Immobilien – über 85 Gemeinschaften</span>
+      <span class="beschr">WEG-Verwaltung in Braunschweig mit zertifizierten Verwaltern: Eigentümerversammlung, Jahresabrechnung, Wirtschaftsplan, Instandhaltung. Verwalterwechsel in vier Schritten.</span>
+      <span class="h1">Hauptüberschrift: „WEG-Verwaltung in Braunschweig“ · Suchbegriffe: WEG-Verwaltung Braunschweig, Verwalterwechsel</span>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Eine Gemeinschaft braucht eine ruhige Hand</h2>
+      <p class="text">In einer Eigentümergemeinschaft treffen viele Interessen aufeinander. Gute Verwaltung sorgt dafür, dass daraus Entscheidungen werden: sachlich vorbereitet, rechtssicher beschlossen und zügig umgesetzt.</p>
+      <p class="text">Über 85 Eigentümergemeinschaften in Braunschweig und der Region vertrauen uns diese Aufgabe an. Unsere Verwalterinnen und Verwalter sind zertifiziert und arbeiten eng mit dem Beirat zusammen.</p>
+    </div>
+    <div class="ansprech"><div class="bild" aria-hidden="true"></div><div><strong>Leitung WEG-Verwaltung</strong><br><span style="color:var(--leise)">Foto, Name und Direktwahl aus dem bestehenden Auftritt</span></div></div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Was unsere WEG-Verwaltung leistet</h2>
+    <div class="raster">
+      <article class="karte"><h3>Eigentümerversammlung</h3><p>Einladung, Tagesordnung, Beschlussvorlagen und Protokoll. <span class="pruef">Auf Wunsch mit Online-Teilnahme und digitaler Abstimmung.</span></p></article>
+      <article class="karte"><h3>Wirtschaftsplan und Jahresabrechnung</h3><p>Pünktlich, prüffähig und so aufgebaut, dass jeder Eigentümer seine Zahlen wiederfindet.</p></article>
+      <article class="karte"><h3>Hausgeld und Rücklagen</h3><p>Wir überwachen die Zahlungen, verwalten die Erhaltungsrücklage getrennt und berichten dem Beirat.</p></article>
+      <article class="karte"><h3>Instandhaltung und Sanierung</h3><p>Von der Dachrinne bis zur Heizungserneuerung: Angebote, Vergabe, Bauüberwachung und Abrechnung.</p></article>
+      <article class="karte"><h3>Beschlüsse umsetzen</h3><p>Jeder Beschluss wird zu einem Vorgang mit Frist und Zuständigkeit. Die Beschlusssammlung führen wir lückenlos.</p></article>
+      <article class="karte"><h3>Zusammenarbeit mit dem Beirat</h3><p>Feste Abstimmungen, Belegprüfung ohne Hürden und kurze Wege zur Verwaltung.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Verwalterwechsel in vier Schritten</h2>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Kennenlernen</h3><p>Der Beirat schildert die Lage der Gemeinschaft. Wir stellen uns und unsere Arbeitsweise vor.</p></article>
+      <article class="karte"><span class="nr">2</span><h3>Angebot</h3><p>Die Gemeinschaft erhält ein Angebot mit Verwaltervertrag zur Vorlage in der Versammlung.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Beschluss</h3><p>Die Eigentümer bestellen Munte als Verwalter. Auf Wunsch stellen wir uns in der Versammlung vor.</p></article>
+      <article class="karte"><span class="nr">4</span><h3>Übergabe</h3><p>Wir übernehmen Unterlagen, Konten und laufende Vorgänge vom bisherigen Verwalter.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Bewährt im Vorgehen, zeitgemäß in den Mitteln</h2>
+      <p class="text">Sorgfalt, Neutralität und ein ordentlich geführtes Konto sind seit über sechs Jahrzehnten unser Maßstab. Neu sind die Werkzeuge: <span class="pruef">Unterlagen stehen den Eigentümern online bereit, Versammlungen lassen sich hybrid durchführen, und der Stand jedes Beschlusses ist nachvollziehbar.</span> So wird Verwaltung für alle Beteiligten durchschaubar.</p>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Häufige Fragen zur WEG-Verwaltung</h2>
+    <div>
+      <details><summary>Wie läuft ein Verwalterwechsel ab?</summary><p>Die Gemeinschaft beschließt in der Eigentümerversammlung die Bestellung des neuen Verwalters. Wir begleiten den Beirat von der Vorbereitung bis zur Übergabe der Unterlagen.</p></details>
+      <details><summary>Was kostet eine WEG-Verwaltung?</summary><p>Die Vergütung hängt von der Zahl der Einheiten und vom Zustand der Anlage ab. <span class="pruef">Sie erhalten ein Angebot mit fester Grundvergütung je Einheit und klar benannten Sonderleistungen.</span></p></details>
+      <details><summary>Sind Ihre Verwalter zertifiziert?</summary><p>Ja. Unsere WEG-Verwalterinnen und -Verwalter sind zertifiziert, wie es das Wohnungseigentumsgesetz vorsieht.</p></details>
+      <details><summary>Können Eigentümer online an der Versammlung teilnehmen?</summary><p><span class="pruef">Ja, wenn die Gemeinschaft das beschlossen hat. Wir richten die Online-Teilnahme ein und führen durch die Abstimmung.</span></p></details>
+      <details><summary>Verwalten Sie auch meine vermietete Eigentumswohnung?</summary><p>Ja, als Sondereigentumsverwaltung. Sie ergänzt die WEG-Verwaltung um alles, was das Mietverhältnis betrifft. Mehr dazu unter <a href="#mietverwaltung">Mietverwaltung</a>.</p></details>
+    </div>
+  </div></section>
+
+  <div class="abschluss"><div class="rand">
+    <h2>Angebot für Ihre Eigentümergemeinschaft</h2>
+    <p>Beiräte und Eigentümer erreichen uns direkt. Wir kommen gern zu einem ersten Gespräch ins Haus.</p>
+    <div class="knopfzeile"><a class="knopf" href="#kontakt">Angebot anfordern</a></div>
+  </div></div>
+</div>
+
+<!-- ===================== VERMIETUNG ===================== -->
+<div class="ansicht" id="ansicht-vermietung">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Für Vermieter · Vermietung und Vermarktung</p>
+    <h1>Wohnung vermieten in Braunschweig</h1>
+    <p class="lead">Wir finden den Mieter, der zu Ihrer Wohnung passt: zum richtigen Preis, mit geprüften Unterlagen und ohne Leerstand.</p>
+    <div class="knopfzeile">
+      <a class="knopf" href="#kontakt">Vermietung anfragen</a>
+      <a class="knopf zweit" href="#mietverwaltung">Dauerhaft verwalten lassen</a>
+    </div>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › wohnung-vermieten-braunschweig</span>
+      <span class="titel">Wohnung vermieten in Braunschweig | Munte Immobilien</span>
+      <span class="beschr">Vermietung von Wohnungen und Gewerbe in Braunschweig: Mietpreis, Exposé, Besichtigungen, Bonitätsprüfung, Mietvertrag und Übergabe. Alles aus einer Hand, von der Anzeige bis zur Schlüsselübergabe.</span>
+      <span class="h1">Hauptüberschrift: „Wohnung vermieten in Braunschweig“ · Suchbegriffe: Wohnung vermieten Braunschweig, Vermietungsservice</span>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Der richtige Mieter ist die beste Absicherung</h2>
+      <p class="text">Eine Wohnung ist schnell vermietet. Gut vermietet ist sie, wenn Miete, Mieter und Vertrag stimmen. Wir kennen den Braunschweiger Mietmarkt aus der täglichen Arbeit und wissen, was eine Wohnung in welcher Lage erzielt.</p>
+    </div>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Mietpreis und Vorbereitung</h3><p>Wir bewerten die Wohnung anhand des Mietspiegels und unserer eigenen Abschlüsse und empfehlen sinnvolle Vorarbeiten.</p></article>
+      <article class="karte"><span class="nr">2</span><h3>Exposé und Vermarktung</h3><p>Gute Fotos, ein ehrlicher Text und die Veröffentlichung auf den großen Portalen und in unserer Interessentenkartei.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Besichtigung und Auswahl</h3><p>Wir führen die Termine, prüfen Bonität und Unterlagen und stellen Ihnen die geeigneten Bewerber vor. Sie entscheiden.</p></article>
+      <article class="karte"><span class="nr">4</span><h3>Vertrag und Übergabe</h3><p>Aktueller Mietvertrag, Kaution, Übergabeprotokoll mit Zählerständen und Fotos.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Was Sie davon haben</h2>
+      <ul class="haken">
+        <li><strong>Weniger Leerstand</strong>, weil die Vermarktung schon mit der Kündigung beginnt</li>
+        <li><strong>Marktgerechte Miete</strong> statt Bauchgefühl</li>
+        <li><strong>Geprüfte Mieter</strong> mit vollständigen Unterlagen</li>
+        <li><strong>Rechtssichere Verträge</strong> auf aktuellem Stand</li>
+        <li><span class="pruef"><strong>Digitaler Ablauf</strong>: Anfragen, Termine und Unterlagen an einem Ort, Sie sehen den Stand</span></li>
+      </ul>
+    </div>
+    <div class="einleitung">
+      <h2>Auch für Gewerbe</h2>
+      <p class="text">Büro, Praxis oder Ladenfläche vermieten wir mit derselben Sorgfalt. Für Gewerbeflächen erstellen wir ein eigenes Vermarktungskonzept und sprechen passende Unternehmen gezielt an.</p>
+      <p class="text">Suchen Sie selbst eine Wohnung? Unsere aktuellen Mietangebote finden Sie bei <a href="#makler">Munte Makler</a>.</p>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Häufige Fragen zur Vermietung</h2>
+    <div>
+      <details><summary>Wer zahlt die Provision bei der Vermietung?</summary><p>Bei Wohnraum gilt das Bestellerprinzip: Wer den Makler beauftragt, bezahlt ihn. Beauftragen Sie uns als Vermieter, entstehen dem Mieter keine Kosten.</p></details>
+      <details><summary>Wie lange dauert eine Vermietung?</summary><p>Das hängt von Lage, Zustand und Preis ab. <span class="pruef">In der Regel steht der neue Mieter innerhalb weniger Wochen fest.</span></p></details>
+      <details><summary>Wie legen Sie die Miete fest?</summary><p>Grundlage sind der Mietspiegel der Stadt Braunschweig, vergleichbare Abschlüsse aus unserem Bestand und der Zustand der Wohnung.</p></details>
+      <details><summary>Kann Munte danach auch die Verwaltung übernehmen?</summary><p>Ja. Viele Vermieter geben nach der Vermietung auch die laufende Betreuung ab. Mehr dazu unter <a href="#mietverwaltung">Mietverwaltung</a>.</p></details>
+    </div>
+  </div></section>
+
+  <div class="abschluss"><div class="rand">
+    <h2>Eine Wohnung wird frei?</h2>
+    <p>Melden Sie sich, sobald die Kündigung vorliegt. Je früher wir beginnen, desto kürzer steht die Wohnung leer.</p>
+    <div class="knopfzeile"><a class="knopf" href="#kontakt">Vermietung anfragen</a></div>
+  </div></div>
+</div>
+
+<!-- ===================== MAKLER ===================== -->
+<div class="ansicht" id="ansicht-makler">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Munte Makler · Kauf und Verkauf</p>
+    <h1>Immobilienmakler in Braunschweig</h1>
+    <p class="lead">Wir verkaufen Häuser, Wohnungen und Anlageobjekte in Braunschweig und der Region: mit realistischem Preis, ehrlicher Beratung und Begleitung bis zum Notartermin.</p>
+    <div class="knopfzeile">
+      <a class="knopf" href="#kontakt">Immobilie bewerten lassen</a>
+      <a class="knopf zweit" href="https://www.munte-makler.de/">Aktuelle Angebote ansehen</a>
+    </div>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › immobilienmakler-braunschweig</span>
+      <span class="titel">Immobilienmakler Braunschweig | Munte Makler – Verkauf &amp; Bewertung</span>
+      <span class="beschr">Haus oder Wohnung verkaufen in Braunschweig: Wertermittlung, Vermarktung, geprüfte Käufer und Begleitung bis zum Notar. Familienunternehmen seit 1960.</span>
+      <span class="h1">Hauptüberschrift: „Immobilienmakler in Braunschweig“ · Suchbegriffe: Immobilienmakler Braunschweig, Haus verkaufen Braunschweig</span>
+    </div>
+    <p class="text" style="color:var(--leise);font-size:.93rem">Die Angebote bleiben auf munte-makler.de. Diese Seite ist die Brücke: Sie erklärt die Leistung und verlinkt in beide Richtungen.</p>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <div class="einleitung">
+      <h2>Verkaufen mit jemandem, der den Bestand kennt</h2>
+      <p class="text">Wer täglich Häuser verwaltet, weiß, was sie wert sind. Dieses Wissen fließt in jede Bewertung ein: Mieten, Instandhaltungsstand, Lage und Nachfrage kennen wir aus eigener Arbeit und nicht nur aus Tabellen.</p>
+      <p class="text">Als Familienunternehmen denken wir in Jahrzehnten. Deshalb raten wir Ihnen auch dann ehrlich, wenn ein Verkauf nicht die beste Lösung ist.</p>
+    </div>
+    <ul class="haken">
+      <li><strong>Einfamilienhäuser und Eigentumswohnungen</strong></li>
+      <li><strong>Mehrfamilienhäuser</strong> und Wohn- und Geschäftshäuser</li>
+      <li><strong>Gewerbeimmobilien</strong> und Portfolios</li>
+      <li><strong>Ankauf</strong>: Munte kauft auch selbst an</li>
+    </ul>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>So läuft der Verkauf</h2>
+    <div class="raster">
+      <article class="karte"><span class="nr">1</span><h3>Wertermittlung</h3><p>Wir besichtigen die Immobilie, werten Unterlagen aus und nennen Ihnen einen erzielbaren Preis.</p></article>
+      <article class="karte"><span class="nr">2</span><h3>Vermarktung</h3><p>Exposé, Fotos, Grundrisse und die Ansprache vorgemerkter Käufer aus unserer Kartei.</p></article>
+      <article class="karte"><span class="nr">3</span><h3>Besichtigung und Verhandlung</h3><p>Wir führen die Termine, prüfen die Finanzierung der Käufer und verhandeln in Ihrem Sinne.</p></article>
+      <article class="karte"><span class="nr">4</span><h3>Notar und Übergabe</h3><p>Wir bereiten den Kaufvertrag mit dem Notar vor und begleiten Sie bis zur Schlüsselübergabe.</p></article>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <div class="einleitung">
+      <h2>Sorgfalt alter Schule, Vermarktung von heute</h2>
+      <p class="text">Ein Handschlag gilt bei uns. Gleichzeitig nutzen wir, was Verkäufern heute hilft: <span class="pruef">digitale Exposés, virtuelle Rundgänge und einen automatischen Abgleich zwischen Ihrer Immobilie und den Suchwünschen vorgemerkter Käufer.</span> So erreichen wir schnell die richtigen Interessenten.</p>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand">
+    <h2>Häufige Fragen zum Verkauf</h2>
+    <div>
+      <details><summary>Was ist meine Immobilie in Braunschweig wert?</summary><p>Das hängt von Lage, Zustand, Größe und der aktuellen Nachfrage ab. Wir ermitteln den Wert nach Besichtigung und Sichtung der Unterlagen.</p></details>
+      <details><summary>Was kostet der Makler?</summary><p><span class="pruef">Die Provision richtet sich nach dem Kaufpreis und wird bei Wohnimmobilien in der Regel zwischen Verkäufer und Käufer geteilt.</span> Die genaue Höhe vereinbaren wir vor dem Auftrag.</p></details>
+      <details><summary>Wie lange dauert ein Verkauf?</summary><p>Vom Auftrag bis zum Notartermin vergehen meist einige Monate. Ein realistischer Preis verkürzt die Zeit deutlich.</p></details>
+      <details><summary>Kann ich eine vermietete Immobilie verkaufen?</summary><p>Ja. Hier hilft unsere Erfahrung aus der <a href="#mietverwaltung">Mietverwaltung</a>: Wir kennen die Zahlen, die Kapitalanleger sehen wollen.</p></details>
+    </div>
+  </div></section>
+
+  <div class="abschluss"><div class="rand">
+    <h2>Was ist Ihre Immobilie wert?</h2>
+    <p>Wir bewerten Ihr Haus oder Ihre Wohnung und besprechen mit Ihnen in Ruhe, welcher Weg der richtige ist.</p>
+    <div class="knopfzeile"><a class="knopf" href="#kontakt">Bewertung anfragen</a></div>
+  </div></div>
+</div>
+
+<!-- ===================== KONTAKT ===================== -->
+<div class="ansicht" id="ansicht-kontakt">
+  <div class="buehne"><div class="rand">
+    <p class="kruemel">Verwaltungsangebot</p>
+    <h1>Angebot anfordern</h1>
+    <p class="lead">Drei Angaben genügen. Wir melden uns mit einem Terminvorschlag.</p>
+  </div></div>
+
+  <section class="block"><div class="rand">
+    <div class="google">
+      <span class="schild">So erscheint die Seite bei Google</span>
+      <span class="adresse">www.munte-immobilien.de › verwaltungsangebot</span>
+      <span class="titel">Hausverwaltung Angebot anfordern | Munte Immobilien Braunschweig</span>
+      <span class="beschr">Angebot für Mietverwaltung, WEG-Verwaltung, Vermietung oder Verkauf in Braunschweig anfordern. Kurzes Formular, persönlicher Rückruf.</span>
+      <span class="h1">Hauptüberschrift: „Angebot anfordern“ · Suchbegriffe: Hausverwaltung Angebot, Verwalterwechsel</span>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="rand zwei">
+    <form class="anfrage" id="anfrage">
+      <label for="f-leistung">Worum geht es?
+        <select id="f-leistung">
+          <option>Mietverwaltung</option>
+          <option>WEG-Verwaltung</option>
+          <option>Vermietung einer Wohnung oder Gewerbefläche</option>
+          <option>Verkauf oder Bewertung</option>
+        </select>
+      </label>
+      <label for="f-objekt">Objekt (Ort, Zahl der Einheiten)
+        <input id="f-objekt" type="text" placeholder="z. B. Braunschweig, 12 Wohnungen">
+      </label>
+      <label for="f-name">Ihr Name
+        <input id="f-name" type="text" autocomplete="name">
+      </label>
+      <label for="f-rueckruf">Telefon oder E-Mail für den Rückruf
+        <input id="f-rueckruf" type="text">
+      </label>
+      <label for="f-text">Nachricht (freiwillig)
+        <textarea id="f-text" rows="3"></textarea>
+      </label>
+      <div><button class="knopf dunkel" type="submit">Anfrage senden</button></div>
+      <p id="anfrage-meldung" role="status">Entwurf: Das Formular sendet nichts.</p>
+    </form>
+    <div class="einleitung">
+      <h2>So geht es weiter</h2>
+      <ul class="haken">
+        <li>Wir rufen innerhalb von <span class="pruef">zwei Werktagen</span> zurück.</li>
+        <li>Wir sehen uns das Objekt gemeinsam an.</li>
+        <li>Sie erhalten ein schriftliches Angebot mit festem Preis.</li>
+      </ul>
+      <h3 style="margin-top:14px">Direkt erreichen</h3>
+      <p class="text">Munte Immobilien GmbH &amp; Co. KG<br>Casparistraße 1, 38100 Braunschweig<br>Telefon 0531 120 64-0<br>info@munte-immobilien.de</p>
+    </div>
+  </div></section>
+</div>
+
+</main>
+
+<footer class="fuss">
+  <div class="rand">
+    <div><h3>Für Eigentümer</h3><ul>
+      <li><a href="#mietverwaltung">Mietverwaltung Braunschweig</a></li>
+      <li><a href="#weg-verwaltung">WEG-Verwaltung Braunschweig</a></li>
+      <li><a href="#vermietung">Wohnung vermieten</a></li>
+      <li><a href="#makler">Immobilie verkaufen</a></li>
+      <li><a href="#kontakt">Angebot anfordern</a></li>
+    </ul></div>
+    <div><h3>Weitere Seiten im Zielbild</h3><ul>
+      <li>Sondereigentumsverwaltung</li>
+      <li>Gewerbeverwaltung</li>
+      <li>Hausverwaltung Wolfsburg · Wolfenbüttel · Salzgitter</li>
+      <li>Für Mieter · Schaden melden</li>
+      <li>Ratgeber für Vermieter</li>
+      <li>Unternehmen · Geschichte · Karriere</li>
+    </ul></div>
+    <div><h3>Entwurf</h3><ul>
+      <li>Strukturvorschlag von CS Consulting</li>
+      <li>Stand 23.11.2026</li>
+      <li>Nicht die Webseite von Munte Immobilien</li>
+    </ul></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var seiten = ["start","mietverwaltung","weg-verwaltung","vermietung","makler","kontakt"];
+  function zeige(){
+    var name = (location.hash || "#start").slice(1);
+    if (seiten.indexOf(name) === -1) name = "start";
+    seiten.forEach(function(s){
+      document.getElementById("ansicht-" + s).classList.toggle("aktiv", s === name);
+    });
+    document.querySelectorAll("nav.haupt a").forEach(function(a){
+      if (a.getAttribute("data-ziel") === name) a.setAttribute("aria-current","page");
+      else a.removeAttribute("aria-current");
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange", zeige);
+  zeige();
+  document.getElementById("anfrage").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("anfrage-meldung").textContent =
+      "Entwurf: Es wurde nichts gesendet. Auf der echten Seite folgt hier die Bestätigung.";
+  });
+})();
+</script>
+</body>
+</html>
